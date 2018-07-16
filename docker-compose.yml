@@ -1,10 +1,11 @@
 version: '2'
 
 services:
-  mirth_database:
-    image: mysql:5.7
+  mirth-database:
+    image: mysql:5.6
+    command: mysqld --innodb-buffer-pool-size=20M
     volumes:
-       - "./data/db:/var/lib/mysql:rw"
+      - "./data/db:/var/lib/mysql:rw"
     environment:
       - "MYSQL_DATABASE=mirth-test"
       - "MYSQL_USER=mirth"
@@ -12,27 +13,18 @@ services:
       - "MYSQL_ROOT_PASSWORD=password"
     ports:
       - "3306:3306"
-    networks:
-      - mirth_connect
-    deploy:
-      mode: replicated
-      replicas: 1
 
-
-  mirth-connect::
+  mirth-connect:
     build: mirth-connect
     volumes:
       - "./data/spools/:/var/spool/mirth/:rw"
     ports:
       - "8080:8080"
       - "8443:8443"
-    network:
-      - mirth_connect
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
+    links:
+      - mirth-database:mysql
+    depends_on:
+      - mirth-database
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -41,17 +33,7 @@ services:
     environment:
       - "MYSQL_USERNAME=root"
       - "MYSQL_PASSWORD=password"
-    networks:
-      - mirth_connect
-    deploy:
-      mode: replicated
-      replicas: 1
-
-
-
-networks:
-  mirth_connect:
-    driver: overlay
-
-volumes:
-  mirth_data:
+    links:
+      - mirth-database:db
+    depends_on:
+      - mirth-database

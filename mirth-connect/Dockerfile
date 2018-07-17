@@ -49,9 +49,9 @@ RUN \
  cp -af /tmp/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.eclipse.emf.ecore_2.5.0.v200906151043.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.eclipse.ocl.ecore_1.3.0.v200905271400.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.ocl_1.3.0.v200905271400.jar /opt/mirth-connect/custom-lib/
+ cp -af /tmp/org.eclipse.ocl_1.3.0.v200905271400.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.openhealthtools.mdht.emf.runtime_1.0.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.uml.cda_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/
+ cp -af /tmp/org.openhealthtools.mdht.uml.cda_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.openhealthtools.mdht.uml.hl7.datatypes_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.openhealthtools.mdht.uml.hl7.rim_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
  cp -af /tmp/org.openhealthtools.mdht.uml.hl7.vocab_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/  && \

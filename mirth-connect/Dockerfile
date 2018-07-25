@@ -64,7 +64,7 @@ RUN \
 
 WORKDIR /opt/mirth-connect
 
-EXPOSE 8080 8443
+EXPOSE 8080 8443 7000-7100
 
 COPY docker-entrypoint.sh /
 

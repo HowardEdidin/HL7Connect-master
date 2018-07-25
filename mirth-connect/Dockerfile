@@ -44,22 +44,16 @@ RUN \
  cp -af /tmp/mirth.properties /opt/mirth-connect/conf/ && \
  cp -af /tmp/extension.properties /opt/mirth-connect/appdata/ && \
  cp -af /tmp/fhir.tar.gz /opt/mirth-connect/extensions/ && \
- cp -af /tmp/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200803061910.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.emf.common_2.5.0.v200906151043.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.emf.ecore_2.5.0.v200906151043.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.ocl.ecore_1.3.0.v200905271400.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.eclipse.ocl_1.3.0.v200905271400.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.emf.runtime_1.0.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.uml.cda_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.uml.hl7.datatypes_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.uml.hl7.rim_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/ && \
- cp -af /tmp/org.openhealthtools.mdht.uml.hl7.vocab_1.2.0.201212201425.jar /opt/mirth-connect/custom-lib/  && \
  cd /opt/mirth-connect/extensions/ && \
  tar -xzvf fhir.tar.gz && \
  rm -f fhir.tar.gz 
  
 
+RUN mkdir /home/Pickup
+RUN mkdir /home/Dropoff
+RUN mkdir /home/Error
+RUN mkdir /home/Extensions
+RUN chown mirth /home/Pickup /home/Dropoff /home/Error /home/Extensions
 
 
 WORKDIR /opt/mirth-connect
@@ -68,6 +62,7 @@ EXPOSE 8080 8443 7000-7100
 
 COPY docker-entrypoint.sh /
 
+RUN  chown mirth /docker-entrypoint.sh
 
 RUN chmod a+x /docker-entrypoint.sh
 

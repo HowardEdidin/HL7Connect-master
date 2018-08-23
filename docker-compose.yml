@@ -1,29 +1,46 @@
-version: '2'
+version: '3.3'
 
 services:
-  
-  fhir-connect:
-    build: mirth-connect
+  mirth-database:
+    image: mysql:8.0.12-1debian9
+    command: mysqld --innodb-buffer-pool-size=20M
+    volumes:
+      - "./data/db:/var/lib/mysql:rw"
+    restart: always  
+    environment:
+      - "MYSQL_DATABASE=mirthdb"
+      - "MYSQL_USER=mirth"
+      - "MYSQL_PASSWORD=password"
+      - "MYSQL_ROOT_PASSWORD=password"
+    ports: 
+      - "3306:3306"
+     restart: always    
+
+  mirth-connect:
+    image: hedidin/fhirconnect:v12
     volumes:
       - "./mirth-connect/mirth.properties:/opt/mirth-connect/conf/mirth.properties:ro"
-      - "./mirth-connect/custom-lib:/home/$USER/customlib2/:rw"
-     # - "./data/spools/:/var/spool/mirth/:rw"
-    ports: 
-      - "8080:8080"
-      - "8443:8443"      
-      - "8902:5001"
-      - "5100:5100"
-      - "7011:7011"
-      - "8092:8092"
-      - "8181:8181"
-      - "8182:8182"
-      - "8093:8193"
+      - "./mirth-connect/custom-lib:/home/bts/customlib2/:rw"
+     ports: 
       - "32768:32768"
-      - "32772:32772" 
-      - "5003:5003"
+      - "32772:32772"
+      - "32811:32811"
+      - "33650:33650"
+      - "33551:33651"
       - "5001:5001"
       - "7010:7010"
+      - "7011:7011"
       - "7012:7012"
-   
-
-  
+      - "8008:8008"
+      - "8009:8009"
+      - "8042:8042"
+      - "8080:8080"
+      - "8091:8091"
+      - "8092:8092"
+      - "8093:8093"
+      - "8181:8181"
+      - "8182:8182"
+      - "8443:8443"    
+    depends_on:
+      - mirth-database     
+    

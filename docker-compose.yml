@@ -1,41 +1,29 @@
 version: '2'
 
 services:
-  mirth-database:
-    image: mysql:5.7
-    command: mysqld --innodb-buffer-pool-size=20M
-    volumes:
-      - "./data/db:/var/lib/mysql:rw"
-    environment:
-      - "MYSQL_DATABASE=mirth-test"
-      - "MYSQL_USER=mirth"
-      - "MYSQL_PASSWORD=password"
-      - "MYSQL_ROOT_PASSWORD=password"
-    ports:
-      - "3306:3306"
-
-  mirth-connect:
+  
+  fhir-connect:
     build: mirth-connect
     volumes:
-      - "./data/spools/:/var/spool/mirth/:rw"
-    ports:
+      - "./mirth-connect/mirth.properties:/opt/mirth-connect/conf/mirth.properties:ro"
+      - "./mirth-connect/custom-lib:/home/$USER/customlib2/:rw"
+     # - "./data/spools/:/var/spool/mirth/:rw"
+    ports: 
       - "8080:8080"
-      - "8443:8443"
-      - "8001:8001"
-      - "80:80"
-    links:
-      - mirth-database:mysql
-    depends_on:
-      - mirth-database
+      - "8443:8443"      
+      - "8902:5001"
+      - "5100:5100"
+      - "7011:7011"
+      - "8092:8092"
+      - "8181:8181"
+      - "8182:8182"
+      - "8093:8193"
+      - "32768:32768"
+      - "32772:32772" 
+      - "5003:5003"
+      - "5001:5001"
+      - "7010:7010"
+      - "7012:7012"
+   
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - "8181:8002"
-    environment:
-      - "MYSQL_USERNAME=root"
-      - "MYSQL_PASSWORD=password"
-    links:
-      - mirth-database:db
-    depends_on:
-      - mirth-database
+  

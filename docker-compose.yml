@@ -21,7 +21,7 @@ services:
     volumes:
       - "./mirth-connect/mirth.properties:/opt/mirth-connect/conf/mirth.properties:ro"
       - "./mirth-connect/custom-lib:/home/bts/customlib2/:rw"
-     ports: 
+    ports: 
       - "32768:32768"
       - "32772:32772"
       - "32811:32811"

@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.12-1debian9
     command: mysqld --innodb-buffer-pool-size=20M
     volumes:
-      - "./data/db:/var/lib/mysql:rw"
+      - "./home/bts/mysql/data/db:/var/lib/mysql:rw"
     restart: always  
     environment:
       - "MYSQL_DATABASE=mirthdb"
@@ -18,9 +18,6 @@ services:
 
   mirth-connect:
     image: hedidin/fhirconnect:v12
-    volumes:
-      - "./mirth-connect/mirth.properties:/opt/mirth-connect/conf/mirth.properties:ro"
-      - "./mirth-connect/custom-lib:/home/bts/customlib2/:rw"
     ports: 
       - "32768:32768"
       - "32772:32772"

@@ -2,17 +2,15 @@ version: '3.3'
 
 services:
   mirth-database:
-    image: mysql:8.0.12-1debian9
-    command: mysqld --innodb-buffer-pool-size=20M  
+    image: postgres:latest 
     volumes:
-      - "./data/db:/var/lib/mysql:rw"
+      - "./data/db:/var/lib/postgresql/data:rw"
     environment:
-      - "MYSQL_DATABASE=mirthdb"
-      - "MYSQL_USER=mirth"
-      - "MYSQL_PASSWORD=password"
-      - "MYSQL_ROOT_PASSWORD=password"
+      - "POSTGRES_USER=mirth"
+      - "POSTGRES_DATABASE=mirthdb
+      - "POSTGRES_PASSWORD=password"
     ports: 
-      - "3306:3306"
+      - "5432:5432"
     restart: always    
 
   mirth-connect:

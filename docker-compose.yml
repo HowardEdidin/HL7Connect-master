@@ -7,7 +7,7 @@ services:
       - "./data/db:/var/lib/postgresql/data:rw"
     environment:
       - "POSTGRES_USER=mirth"
-      - "POSTGRES_DATABASE=mirthdb
+      - "POSTGRES_DATABASE=mirthdb"
       - "POSTGRES_PASSWORD=password"
     ports: 
       - "5432:5432"

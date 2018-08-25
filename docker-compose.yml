@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   mirth-database:
-    image: mysql:8.0.12-1debian9
+    image: mysql:latest
     command: mysqld --innodb-buffer-pool-size=20M
     volumes:
       - "./home/bts/mysql/data/db:/var/lib/mysql:rw"
